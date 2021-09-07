@@ -1,0 +1,93 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Play);
+@import url(http://fonts.googleapis.com/css?family=Monoton);
+
+*{margin: 0; padding: 0; box-sizing: border-box; border: 0;}
+ul{
+    list-style: none;
+}
+
+body{position: fixed; width: 100%; height: 100%;}
+
+.video-background {
+    background: #000;
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -99;
+}
+.video-foreground,
+.video-background iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+@media (min-aspect-ratio: 16/9) {
+.video-foreground { height: 300%; top: -100%; }
+}
+@media (max-aspect-ratio: 16/9) {
+.video-foreground { width: 300%; left: -100%; }
+}
+h1{ color:white;}
+
+header { 
+    width:400px; 
+    height:100%; 
+    position:fixed; 
+    top:0px; 
+    left:0px; 
+    transform: skewX(-45deg);
+    /* rgba는 색깔과 투명도를 같이 설정 할 수 있다. */
+    background:rgba(0, 0, 0, 0.6); transform:skewX(-15deg); 
+    
+}
+
+#gnb { width:220px; position:absolute; top:150px; right:0px; opacity:1 !important;}
+#gnb>li {position:relative; opacity:1 !important;}
+/* font:bold 18px/3 play에서의 18px/3 => font-size 18px; line-height:3 과 같은 말이다. */
+#gnb>li>a { display:block; width:220px; height:50px; font:bold 20px/3 play; color:white; box-sizing:border-box; padding-right:40px; text-align:start; opacity: 1 !important;}
+#gnb>li:hover>a{background: #ddd; color: black;} /* 마우스를 올리면 배경색이 회색이 되고, 글자의 색깔이 검정색으로 변하게 한다. */
+#gnb em { display:inline-block; transform:skewX(15deg)!important; }
+#gnb>li.on>a {background:rgba(0, 0, 0, 0); color: #fff;}
+
+#gnb>li>ul{position: absolute; left: 0; top: 0; opacity: 0; transition: 0.4s;} 
+#gnb>li:hover>ul{left:220px; opacity: 1;} 
+#gnb ul a{display: block; width: 220px; height: 50px; color: #fff; font:bold 16px/4 arial; box-sizing:border-box; padding-left:50px; margin-bottom:3px; transition: 0.5s; opacity: 0.7;} /* 링크를 버튼처럼 만드는 방법 display:block; width:220px; height:50px; */
+#gnb ul a:hover { background:rgb(14, 12, 12); color:white;; opacity: 0.7;}
+
+/* 텍스트 박스 */
+.txtBox { width:340px; height:280px; position:fixed; top:90px; right:70px; }
+.txt { position:absolute; top:200px; right:0px; font-size:34px; font-family:play; color:#bbb; letter-spacing:-2px;}
+.tit { position:absolute; top:0px; right:0px; font-size:160px; color: rgb(14, 12, 12);; font-family: 'Monoton', cursive; letter-spacing:-1px;}
+.tit em { font-size:50px; font-family:play; color:#fff;}
+
+/* contents 레이아웃 */
+#side { width:800px; height:100%; position:fixed; bottom:0px; right:-800px; background:#111; opacity:0.5; transform:skewX(-10deg); transition:all 0.5s;}
+#side:hover { right:-350px; opacity:0.8;}
+#side .con { width:400px; height:100%; position:absolute; left:150px; bottom:0px; background:#000; 	box-sizing:border-box; padding:10px; transition:all  1s;}
+#side:hover .con { left:50px;}
+
+/* contents내 썸네일 */
+#side .con p { width: 300px; height:100px; position:absolute; left:50px;}
+#side .con p em { display:inline-block; font:bold 16px/1.7 arial; color:gray; transform:skewX(-15deg);}
+#side .con p img { width:300px; height:70px; opacity:0.3; transition:all 0.5s;}
+#side .con p img:hover { opacity:1;}
+#side .con p:nth-child(1) { bottom:270px; transform: translateX(200px); transition:all  0.4s;}
+#side .con p:nth-child(2) { bottom:160px; transform: translateX(200px); transition:all  0.8s;}
+#side .con p:nth-child(3) { bottom:50px; transform: translateX(200px); transition:all  1.2s;}
+#side:hover .con p { transform:translateX(0px);}
+
+/* 자동 롤링 버튼 */
+#side .btnContents { width:150px; height:50px; position:absolute;  bottom:40px; left:100px; color:#b9fb05;	transform:skewX(15deg); }
+#side:hover .btnContents { left: 700px;}	
+.btnContents i { font-size:60px; position:absolute; bottom:0px; right:0px; opacity:1;}
+.btnContents i {
+    animation: ani; animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+@keyframes ani{
+    0%{right: 0%; transform: scale(1);}
+    100%{right: 200px; transform: scale(1.5);}
+}
